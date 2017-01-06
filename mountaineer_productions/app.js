@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose =require('mongoose');
 
+app.use(bodyParser.json());
+
 Genre = require('./models/genre');
 Artist = require('./models/artists');
 
@@ -25,9 +27,31 @@ app.get('/api/genres', function(req, res){
   });
 });
 
-// music
+app.post('/api/genres', function(req, res){
+  var genre = req.body;
+  Genre.addGenre(genre, function(err, genre){
+    if(err){
+      throw err;
+    }
+    res.json(genre);
+  });
+});
+
+
+
+
+// artists
 app.get('/api/artists', function(req, res){
-  Artist.getArtists(function(err, artist){
+  Artist.getArtists(function(err, artists){
+    if(err){
+      throw err;
+    }
+    res.json(artists);
+  });
+});
+
+app.get('/api/artists/:_id', function(req, res){
+  Artist.getArtistById(req.params._id, function(err, artist){
     if(err){
       throw err;
     }

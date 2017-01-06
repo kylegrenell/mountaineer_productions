@@ -29,7 +29,15 @@ var artistSchema = mongoose.Schema({
 
 var Artist = module.exports = mongoose.model('Artist', artistSchema);
 
-// Get genres
+// Get Artists
 module.exports.getArtists = function(callback, limit){
   Artist.find(callback).limit(limit);
 }
+
+// Get Artist By Id
+module.exports.getArtistById = function(id, callback){
+  Artist.findById(id, callback);
+}
+
+
+
