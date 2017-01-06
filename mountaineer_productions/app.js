@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose =require('mongoose');
 
 Genre = require('./models/genre');
+Artist = require('./models/artists');
 
 // connect to mongoose
 mongoose.connect('mongodb://localhost/mountaineers');
@@ -11,7 +12,7 @@ var db = mongoose.connection;
 
 // http requests - restful routes
 app.get('/', function(req, res){
-  res.send('Please use /api/packs');
+  res.send('Please use /api/genres or api/music');
 });
 
 // genres
@@ -21,6 +22,16 @@ app.get('/api/genres', function(req, res){
       throw err;
     }
     res.json(genres);
+  });
+});
+
+// music
+app.get('/api/artists', function(req, res){
+  Artist.getArtists(function(err, artist){
+    if(err){
+      throw err;
+    }
+    res.json(artist);
   });
 });
 
