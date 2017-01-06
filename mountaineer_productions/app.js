@@ -42,6 +42,30 @@ app.post('/api/genres', function(req, res){
   });
 });
 
+// PUT
+app.put('/api/genres/:id', function(req, res){
+  var id = req.params.id;
+  var genre = req.body;
+  Genre.updateGenre(id, genre, {}, function(err, genre){
+    if(err){
+      throw err;
+    }
+    res.json(genre);
+  });
+});
+
+// DELETE
+app.delete('/api/genres/:id', function(req, res){
+  var id = req.params.id;
+  Genre.deleteGenre(id, function(err, genre){
+    if(err){
+      throw err;
+    }
+    res.json(genre);
+  });
+});
+
+
 //////////////////////////
 //////// artists /////////
 //////////////////////////
@@ -57,8 +81,8 @@ app.get('/api/artists', function(req, res){
 });
 
 //GET ID
-app.get('/api/artists/:_id', function(req, res){
-  Artist.getArtistById(req.params._id, function(err, artist){
+app.get('/api/artists/:id', function(req, res){
+  Artist.getArtistById(req.params.id, function(err, artist){
     if(err){
       throw err;
     }
@@ -74,6 +98,29 @@ app.post('/api/artists', function(req, res){
       throw err;
     }
     res.json(artist);
+  });
+});
+
+// PUT
+app.put('/api/artists/:id', function(req, res){
+  var id = req.params.id;
+  var artist = req.body;
+  Artist.updateArtist(id, artist, {}, function(err, artist){
+    if(err){
+      throw err;
+    }
+    res.json(artist);
+  });
+});
+
+// DELETE
+app.delete('/api/artists/:id', function(req, res){
+  var id = req.params.id;
+  Artist.deleteArtist(id, function(err, genre){
+    if(err){
+      throw err;
+    }
+    res.json(genre);
   });
 });
 
