@@ -17,7 +17,11 @@ app.get('/', function(req, res){
   res.send('Please use /api/genres or api/music');
 });
 
-// genres
+///////////////////////
+/////// genres ////////
+///////////////////////
+
+// GET
 app.get('/api/genres', function(req, res){
   Genre.getGenres(function(err, genres){
     if(err){
@@ -27,6 +31,7 @@ app.get('/api/genres', function(req, res){
   });
 });
 
+// POST
 app.post('/api/genres', function(req, res){
   var genre = req.body;
   Genre.addGenre(genre, function(err, genre){
@@ -37,10 +42,11 @@ app.post('/api/genres', function(req, res){
   });
 });
 
+//////////////////////////
+//////// artists /////////
+//////////////////////////
 
-
-
-// artists
+// GET
 app.get('/api/artists', function(req, res){
   Artist.getArtists(function(err, artists){
     if(err){
@@ -50,6 +56,7 @@ app.get('/api/artists', function(req, res){
   });
 });
 
+//GET ID
 app.get('/api/artists/:_id', function(req, res){
   Artist.getArtistById(req.params._id, function(err, artist){
     if(err){
@@ -58,6 +65,20 @@ app.get('/api/artists/:_id', function(req, res){
     res.json(artist);
   });
 });
+
+// POST
+app.post('/api/artists', function(req, res){
+  var artist = req.body;
+  Artist.addArtist(artist, function(err, artist){
+    if(err){
+      throw err;
+    }
+    res.json(artist);
+  });
+});
+
+
+
 
 //listen on port 3000
 app.listen(3000);

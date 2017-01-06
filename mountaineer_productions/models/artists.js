@@ -39,5 +39,9 @@ module.exports.getArtistById = function(id, callback){
   Artist.findById(id, callback);
 }
 
+// add artist
+module.exports.addArtist = function(artist, callback){
+  Artist.create(artist, callback);
+}
 
 
